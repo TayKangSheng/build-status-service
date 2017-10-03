@@ -6,8 +6,23 @@ class JenkinsController < ApplicationController
       return
     end
 
-    response = jenkins_api_service.get_build_status(params[:job])
-    render json: response, status: (response[:status] || 200)
+    status = jenkins_api_service.get_build_status(params[:job])
+
+    send_file get_image(status[:color]), type: 'image/png', disposition: 'inline'
+  end
+
+  private
+
+  def get_image(color)
+    puts "COLOR:: #{color}"
+    case color
+      when 'blue'
+        Rails.root.join('public', 'build-passing.png')
+      when 'red'
+        Rails.root.join('public', 'build-failure.png')
+      else
+        Rails.root.join('public', 'build-error.png')
+    end
   end
 
   def jenkins_api_service
