@@ -1,4 +1,4 @@
-source 'https://rubygems.org'
+source 'http://nexus.in.spdigital.io/repository/rubygems-all/'
 
 ruby '2.4.1'
 
