@@ -26,7 +26,7 @@ class JenkinsApiService
   end
 
   def get(relative_url, query_params)
-    full_url = ENV['JENKINS_HOST'] + relative_url + query_params
+    full_url = 'https://jenkins.in.spdigital.io' + relative_url + query_params
     puts full_url
 
     ctx = OpenSSL::SSL::SSLContext.new
